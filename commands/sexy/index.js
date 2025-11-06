@@ -45,7 +45,7 @@ module.exports = {
 
       do {
         images = await Promise.all([getImage(), getImage(), getImage()]);
-      } while (images.every((img) => !img));
+      } while (images.every((img) => img));
 
       if (images.some((img) => !img)) {
         return interaction.editReply(

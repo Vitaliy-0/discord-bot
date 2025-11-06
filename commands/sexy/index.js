@@ -41,12 +41,7 @@ module.exports = {
         return data?.image;
       };
 
-      let images = [];
-
-      do {
-        images = await Promise.all([getImage(), getImage(), getImage()]);
-      } while (images.every((img) => img));
-
+      const images = await Promise.all([getImage(), getImage(), getImage()]);
       if (images.some((img) => !img)) {
         return interaction.editReply(
           "❌ Не удалось загрузить картинки, попробуй ещё раз!"

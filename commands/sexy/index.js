@@ -119,7 +119,13 @@ module.exports = {
         await btn.update({ embeds: newEmbeds });
       });
 
-      collector.on("end", () => interaction.editReply({ components: [] }));
+      collector.on("end", () => {
+        try {
+          interaction.editReply({ components: [] })
+        } catch (err) {
+          console.log("Не удалось обновить сообщение (возможно удалено).");
+        }
+      });
     } catch (err) {
       console.error(err);
       await interaction.editReply("🔥 Ошибка при загрузке, попробуй позже!");

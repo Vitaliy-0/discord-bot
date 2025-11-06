@@ -23,6 +23,11 @@ module.exports = {
       const categoriesFromApi = await fetch(categories, {
         headers: { Authorization: process.env.HENTAICORD_API_KEY },
       });
+      if (!categoriesFromApi?.ok) {
+        return interaction.editReply(
+          "❌ Не удалось загрузить категории, попробуй ещё раз!"
+        );
+      }
       const { categories: categoriesArray } = await categoriesFromApi.json();
       const withoutCategories = ["yaoi"];
 

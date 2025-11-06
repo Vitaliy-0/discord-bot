@@ -14,7 +14,7 @@ const votesStorage = new Map();
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("sexy")
-    .setDescription("3 картинки, 1 голос на человека"),
+    .setDescription("3 картинки, 1 голос на человека, 60 сек. на ответ"),
 
   async execute(interaction) {
     await interaction.deferReply();
@@ -74,7 +74,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
 
-      const msg = await interaction.editReply({ embeds, components: [row] });
+        const msg = await interaction.editReply({ content: "60 секунд на голосование", embeds, components: [row] });
 
       // Инициализация голосов и списков
       votesStorage.set(msg.id, {

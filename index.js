@@ -3,6 +3,19 @@ const path = require("node:path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 require("dotenv").config();
 
+const PORT = process.env.PORT || 3000;
+
+// ✅ Добавляем HTTP-сервер, чтобы Render не ругался
+const http = require("http");
+http
+  .createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Bot is running on Render!\n");
+  })
+  .listen(PORT, () => {
+    console.log(`🌐 Web server listening on port ${PORT}`);
+  });
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
